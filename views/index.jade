@@ -1,0 +1,41 @@
+extends layout
+
+block body
+	.navbar.navbar-fixed-top
+		.navbar-inner
+			.container-fluid
+				a.brand(href='#') Nagi
+				ul.nav
+					//li
+						a(href='view1') Home
+					//li
+						a(href='view2') List
+	.container-fluid
+		div(ng-controller='AppCtrl')
+			.hero-unit(drop-zone)
+				h1 Drop in file here
+				input.hide(type='file')
+			div(ng-view)
+			.media
+				a.pull-left(href="#")
+					div.media-object(data-src='holder.js/64x64',style='background: url({{path}}) no-repeat center center;background-size:64px 64px;width:64px;height:64px;')
+				.media-body
+					h4.media-heading {{filename}}
+					input(placeholder='http://',value='{{link}}',style='width:80%')
+			p
+			p
+			.progress
+				.bar(style="width:{{progress}}%")
+		hr
+		div
+			| Angular seed app: v
+			span(app-version)
+
+	script(src='js/lib/angular/angular.js')
+	script(src='js/app.js')
+	script(src='js/services.js')
+	script(src='js/controllers.js')
+	script(src='js/filters.js')
+	script(src='js/directives.js')
+	script(src='js/lib/jquery/jquery-1.9.1.min.js')
+	script(src='bootstrap/js/bootstrap.min.js')
