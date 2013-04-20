@@ -29,7 +29,7 @@ function AppCtrl($scope, $http) {
 
 	$scope.upload = function(file){
 		console.log(file.name);
-		file.name = '123.png';
+
 		console.log(file);
 		var formData = new FormData();
 		formData.append('file',file);
