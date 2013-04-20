@@ -44,7 +44,7 @@ function AppCtrl($scope, $http) {
 
 		xhr.upload.onprogress = function (e) {
 			if (e.lengthComputable) {
-				var complete = (event.loaded / event.total * 100 | 0);
+				var complete = (e.loaded / e.total * 100 | 0);
 				$scope.progress = complete;
 				$scope.$apply();
 			}
