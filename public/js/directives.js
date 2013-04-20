@@ -18,6 +18,8 @@ mod.directive("dropZone", function () {
 
 		elm.bind('dragenter', scope.onDragStart);
 
+		elm.bind('dragleave', scope.onDragLeave);
+
 		elm.bind('drop', scope.onDrop);
 
 	}
