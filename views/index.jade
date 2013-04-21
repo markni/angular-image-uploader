@@ -12,6 +12,9 @@ block body
 						a(href='view2') List
 	.container-fluid
 		div(ng-controller='AppCtrl')
+			.alert.alert-error(ng-class="{hidden:!Error}")
+				button(type="button",class="close",ng-click='clearError()') ×
+				span Error:{{Error}}
 			.hero-unit(drop-zone,ng-class="{active:onDrag}")
 				h1 Drop in file here
 				input.hide(type='file')

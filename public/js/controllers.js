@@ -8,6 +8,12 @@ function AppCtrl($scope, $http) {
 		if (e.preventDefault) e.preventDefault();
 	}
 
+	function s4() {
+		return Math.floor((1 + Math.random()) * 0x10000)
+			.toString(16)
+			.substring(1);
+	};
+
 	var base_url = 'http://nagi.ca/u/';
 
 //	$http({method:'GET', url:'/api/name'}).
@@ -23,22 +29,22 @@ function AppCtrl($scope, $http) {
 	$scope.progress = 0;
 	$scope.onDrag = false;
 
+
 	$scope.changeName = function(){
 		$scope.name = 'man';
 	}
 
-	$scope.upload = function(file){
-		console.log(file.name);
-
-		console.log(file);
-
+	$scope.upload = function(file,uuid){
+		$scope.Error = null;
 		var formData = new FormData();
 		formData.append('file',file);
+		formData.append('uuid',uuid);
 		console.log(formData);
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST', '/upload');
 		xhr.onload = function() {
 			$scope.progress =  100;
+
 			$scope.$apply();
 		};
 
@@ -66,6 +72,7 @@ function AppCtrl($scope, $http) {
 	}
 
 	$scope.onDrop = function(e){
+		var uuid = s4() + s4() + s4();
 		this.name = 'man';
 
 		stopEvent(e);
@@ -78,11 +85,13 @@ function AppCtrl($scope, $http) {
 
 			return function (e) {
 				var src = e.target.result;
+
 				if (src) {
 					$scope.path = src;
 					$scope.filename = theFile.name;
+					console.log(theFile)
 					var fileExtension = '.' + theFile.name.split('.').pop();
-					$scope.link = 'http://'+ window.location.host + '/u/' + hash(theFile.name)+fileExtension;
+					$scope.link = 'http://'+ window.location.host + '/u/' + uuid+fileExtension;
 					console.log($scope.link);
 					$scope.$apply();
 				}
@@ -90,7 +99,15 @@ function AppCtrl($scope, $http) {
 
 			};
 		})(f);
-		$scope.upload(f);
+
+
+		if (f.size > 5000000){
+			$scope.Error = ' The File you selected is too big. ';
+		}
+		else{
+			$scope.upload(f,uuid);
+		}
+
 	}
 
 	$scope.onDragOver = function(e){
@@ -115,6 +132,9 @@ function AppCtrl($scope, $http) {
 
 	}
 
+	$scope.clearError = function(e){
+		$scope.Error = null;
+	}
 
 }
 

@@ -26,10 +26,9 @@ exports.upload = function (req, res) {
 	}
 
 	if (req.files){
-		console.log(req.files);
 		fs.readFile(req.files.file.path, function (err, data) {
 			var fileExtension = '.'+ req.files.file.name.split('.').pop();
-			var newPath = './public/u/'+hash(req.files.file.name)+fileExtension;
+			var newPath = './public/u/'+req.body.uuid+fileExtension;
 			console.log(newPath);
 			fs.writeFile(newPath, data, function (err) {
 				if (err) console.log(err);
