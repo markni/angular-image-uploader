@@ -52,7 +52,7 @@ if (env === 'dev'){
 }
 else
 {
-	app.listen(80,"192.81.131.191", function(){
+	app.listen(8001,"192.81.131.191", function(){
 		console.log("Server started, port 80");
 	});
 }
