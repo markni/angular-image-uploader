@@ -1,21 +1,12 @@
 extends layout
 
 block body
-	.navbar.navbar-fixed-top
-		.navbar-inner
-			.container-fluid
-				a.brand(href='#') Nagi
-				ul.nav
-					//li
-						a(href='view1') Home
-					//li
-						a(href='view2') List
 	.container-fluid
-		div(ng-controller='AppCtrl')
+		div(drop-zone,ng-controller='AppCtrl',ng-cloak	)
 			.alert.alert-error(ng-class="{hidden:!Error}")
 				button(type="button",class="close",ng-click='clearError()') ×
 				span Error:{{Error}}
-			.hero-unit(drop-zone,ng-class="{active:onDrag}")
+			.hero-unit(ng-class="{active:onDrag}")
 				h1 Drop in file here
 				input.hide(type='file')
 			div(ng-view)
@@ -29,10 +20,8 @@ block body
 			p
 			.progress
 				.bar(style="width:{{progress}}%")
-		hr
-		div
-			| Angular seed app: v
-			span(app-version)
+
+
 
 	script(src='js/lib/angular/angular.js')
 	script(src='js/app.js')
